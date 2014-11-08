@@ -31,11 +31,6 @@ public class ScreenReceiver extends BroadcastReceiver {
 
             wasScreenOn = true;
         }
-        else if(intent.getAction().equals("LeapeatStop"))
-        {
-            ServiceForScreenOnDetection.stopSelf();
-            Log.i("C","Stelle, an der service gestoppt werden soll");
-        }
     }
 
 }
