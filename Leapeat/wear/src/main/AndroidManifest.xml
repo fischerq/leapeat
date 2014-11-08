@@ -12,11 +12,7 @@
         <activity
             android:name="com.example.florian.leapeat.MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <service
@@ -44,6 +40,15 @@
         <activity
             android:name="com.example.florian.leapeat.VocoClockActivity"
             android:label="@string/title_activity_voco_clock" >
+        </activity>
+        <activity
+            android:name="com.example.florian.leapeat.ShowStartLogoActivity"
+            android:label="@string/title_activity_show_start_logo" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
