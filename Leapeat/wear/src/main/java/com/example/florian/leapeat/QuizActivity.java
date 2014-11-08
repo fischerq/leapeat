@@ -107,7 +107,7 @@ public class QuizActivity extends FragmentActivity {
 
                 View.setOnTouchListener(new android.view.View.OnTouchListener() {
                     public boolean onTouch(View v, MotionEvent event) {
-                        int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
+
                         int action = MotionEventCompat.getActionMasked(event);
 
                         switch (action) {
@@ -127,6 +127,7 @@ public class QuizActivity extends FragmentActivity {
                                     @Override
                                     public void onLayoutInflated(WatchViewStub stub) {
                                         TextView vocabularyTextx = (TextView) findViewById(R.id.vocabText);
+                                        int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
                                         vocabularyTextx.setText(Vocabulary[category][index][0]);
                                     }
                                 });
