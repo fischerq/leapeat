@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MotionEventCompat;
 import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,6 +38,7 @@ public class QuizActivity extends FragmentActivity {
     public int AnswerFalse = 0;
 
     private int mode = 1;
+    public TextView vocabularyText;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +65,10 @@ public class QuizActivity extends FragmentActivity {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                // mTextView = (TextView) stub.findViewById(R.id.text);
-                TextView vocabularyText = (TextView) findViewById(R.id.vocabText);
+                vocabularyText = (TextView) findViewById(R.id.vocabText);
                 vocabularyText.setText(Vocabulary[index][0]);
+
+
             }
         });
     }
@@ -82,6 +87,40 @@ public class QuizActivity extends FragmentActivity {
                 index++;
                 if (index >= 3)
                     index = 0;
+
+                View.setOnTouchListener(new android.view.View.OnTouchListener() {
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = MotionEventCompat.getActionMasked(event);
+
+                        switch(action) {
+                            case (MotionEvent.ACTION_DOWN) :
+                                Log.d("DEBUG_TAG", "Action was DOWN");
+                                return true;
+                            case (MotionEvent.ACTION_MOVE) :
+                                Log.d("DEBUG_TAG","Action was MOVE");
+                                return true;
+                            case (MotionEvent.ACTION_UP) :
+                                Log.d("DEBUG_TAG","Action was UP");
+                                setContentView(R.layout.activity_quiz);
+                                vocabularyText.setText(Vocabulary[index][0]);
+                                
+                                return true;
+                            case (MotionEvent.ACTION_CANCEL) :
+                                Log.d("DEBUG_TAG","Action was CANCEL");
+                                return true;
+                            case (MotionEvent.ACTION_OUTSIDE) :
+                                Log.d("DEBUG_TAG","Movement occurred outside bounds of current screen element");
+                                return true;
+                            default :
+                                Log.d("DEBUG_TAG","Action Default for Touch Event");
+                                return true;
+                        }
+
+                    }
+                });
+
+
             }
         });
     }
@@ -103,6 +142,41 @@ public class QuizActivity extends FragmentActivity {
             }
         });
     }
+
+    /*@Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        int eventaction = event.getAction();
+
+        switch (eventaction) {
+            case MotionEvent.ACTION_DOWN:
+                // finger touches the screen
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                // finger moves on the screen
+                break;
+
+            case MotionEvent.ACTION_UP:
+                System.out.println("asdfasdfasdf");
+                break;
+        }
+
+        return true;
+    }*/
+/*
+    GestureDetector.SimpleOnGestureListener simpleOnGestureListener= new SimpleOnGestureListener()
+    {
+
+        @Override
+        public boolean onSingleTapUp(MotionEvent e) {
+
+            return super.onSingleTapUp(e);
+        }
+        GestureDetector gestureDetector
+                = new GestureDetector(simpleOnGestureListener);
+    };
+
 
 
     //GestureDetector.SimpleOnGestureListener()
@@ -131,6 +205,6 @@ public class QuizActivity extends FragmentActivity {
                 Log.d("DEBUG_TAG","Action Default for Touch Event");
                 return super.onTouchEvent(event);
         }
-    }
+    }*/
 
 }
