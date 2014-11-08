@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Leapeat</string>
+    <string name="hello_round">Hello Round World!</string>
+    <string name="hello_square">Hello Square World!</string>
+    <string name="learning">Lernen</string>
+    <string name="vocabulary">Vokabeln</string>
+    <string name="settings">Einstellungen</string>
+
+</resources>
