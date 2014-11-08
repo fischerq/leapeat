@@ -16,6 +16,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/answer1"
             android:gravity="center"
+            android:textColor="#FFAD2C"
             android:text="" />
 
     </LinearLayout>
