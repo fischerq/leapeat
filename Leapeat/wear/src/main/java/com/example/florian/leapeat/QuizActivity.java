@@ -113,22 +113,22 @@ public class QuizActivity extends FragmentActivity {
 
         switch(action) {
             case (MotionEvent.ACTION_DOWN) :
-                Log.d(DEBUG_TAG, "Action was DOWN");
+                Log.d("DEBUG_TAG", "Action was DOWN");
                 return true;
             case (MotionEvent.ACTION_MOVE) :
-                Log.d(DEBUG_TAG,"Action was MOVE");
+                Log.d("DEBUG_TAG","Action was MOVE");
                 return true;
             case (MotionEvent.ACTION_UP) :
-                Log.d(DEBUG_TAG,"Action was UP");
+                Log.d("DEBUG_TAG","Action was UP");
                 return true;
             case (MotionEvent.ACTION_CANCEL) :
-                Log.d(DEBUG_TAG,"Action was CANCEL");
+                Log.d("DEBUG_TAG","Action was CANCEL");
                 return true;
             case (MotionEvent.ACTION_OUTSIDE) :
-                Log.d(DEBUG_TAG,"Movement occurred outside bounds of current screen element");
+                Log.d("DEBUG_TAG","Movement occurred outside bounds of current screen element");
                 return true;
             default :
-                Log.d(DEBUG_TAG,"Action Default for Touch Event");
+                Log.d("DEBUG_TAG","Action Default for Touch Event");
                 return super.onTouchEvent(event);
         }
     }
