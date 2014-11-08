@@ -32,6 +32,7 @@
             android:onClick="ActionButtonYes"
             android:src="@drawable/yesbutton"
             android:id="@+id/ButtonYes" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
