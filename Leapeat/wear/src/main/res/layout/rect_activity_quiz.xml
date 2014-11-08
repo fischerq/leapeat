@@ -14,11 +14,11 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:id="@+id/editText"
+        android:id="@+id/vocabText"
         android:gravity="center"
-        android:text="to comprehend" />
+        android:text="" />
 
-        </LinearLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -29,7 +29,9 @@
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/imageButton1" />
+            android:onClick="ActionButtonYes"
+            android:src="@drawable/yesbutton"
+            android:id="@+id/ButtonYes" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
@@ -37,7 +39,9 @@
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/imageButton2" />
+            android:onClick="ActionButtonNo"
+            android:src="@drawable/nobutton"
+            android:id="@+id/ButtonNo" />
 
     </LinearLayout>
 
