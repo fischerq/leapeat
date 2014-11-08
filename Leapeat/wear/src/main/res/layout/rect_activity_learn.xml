@@ -5,5 +5,14 @@
     tools:context="com.example.florian.leapeat.LearnActivity" tools:deviceIds="wear_square">
 
     <TextView android:id="@+id/text" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="Lernmodus" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Modus" />
+
+    <Button
+        android:id="@+id/QuizButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startQuiz"
+        android:text="start leapeating"/>
 </LinearLayout>
