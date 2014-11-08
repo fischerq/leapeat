@@ -28,8 +28,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        Intent service = new Intent(this, ScreenService.class);
-        startService(service);
+
     }
 
     public void startLearning(View view)

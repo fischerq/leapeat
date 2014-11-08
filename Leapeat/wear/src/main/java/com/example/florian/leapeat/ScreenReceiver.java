@@ -9,6 +9,14 @@ public class ScreenReceiver extends BroadcastReceiver {
     // thanks Jason
     public static boolean wasScreenOn = true;
 
+    ScreenService ServiceForScreenOnDetection;
+
+    ScreenReceiver(ScreenService Service)
+    {
+        ServiceForScreenOnDetection = Service;
+    }
+
+
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
@@ -22,6 +30,11 @@ public class ScreenReceiver extends BroadcastReceiver {
             context.startActivity(intent_learn);
 
             wasScreenOn = true;
+        }
+        else if(intent.getAction().equals("LeapeatStop"))
+        {
+            ServiceForScreenOnDetection.stopSelf();
+            Log.i("C","Stelle, an der service gestoppt werden soll");
         }
     }
 

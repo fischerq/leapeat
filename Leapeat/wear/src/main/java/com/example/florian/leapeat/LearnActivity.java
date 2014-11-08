@@ -36,12 +36,16 @@ public class LearnActivity extends Activity {
         CheckBox CheckBoxVoc = (CheckBox) findViewById(R.id.checkBox_VocoClock);
 
 
-        if (CheckBoxTime.isChecked())
+        if (CheckBoxTime.isChecked()) {
             CheckBoxTime.setChecked(false);
-
+            stopService(new Intent(this,ScreenService.class));
+        }
         else{
             CheckBoxTime.setChecked(true);
             CheckBoxVoc.setChecked(false);
+
+            Intent service = new Intent(this, ScreenService.class);
+            startService(service);
         }
 
         //Intent intent = new Intent(this, EveryTimeActivity.class);

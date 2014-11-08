@@ -16,7 +16,8 @@ public class ScreenService extends Service {
         // register receiver that handles screen on and screen off logic
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
-        BroadcastReceiver mReceiver = new ScreenReceiver();
+        filter.addAction("LeapeatStop");
+        BroadcastReceiver mReceiver = new ScreenReceiver(this);
         registerReceiver(mReceiver, filter);
         Log.i("Service", "Started!");
     }
@@ -35,4 +36,10 @@ public class ScreenService extends Service {
         Log.i("Service", "Bind??");
         return null;
     }
+
+    public void onDestroy(){
+        Log.i("Service Destroyed","Destroyed" );
+        super.onDestroy();
+    }
+
 }
