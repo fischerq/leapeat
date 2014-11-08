@@ -60,9 +60,9 @@ public class QuizActivity extends FragmentActivity {
     public void ActionButtonNo(View view)
     {
         AnswerFalse++;
-        Intent intent = new Intent(this, AnswerActivity.class);
-        intent.putExtra("MESSAGE", Vocabulary[index][1]);
-        startActivity(intent);
+        //Intent intent = new Intent(this, AnswerActivity.class);
+        //intent.putExtra("MESSAGE", Vocabulary[index][1]);
+        //startActivity(intent);
     }
 
     public class ScreenSlidePageFragment extends Fragment {

@@ -21,8 +21,8 @@
 
         <service
             android:name="com.example.florian.leapeat.ScreenService"
-            android:label="LepeatBackground"
-            android:enabled="true">
+            android:enabled="true"
+            android:label="LepeatBackground" >
         </service>
 
         <activity
@@ -36,6 +36,14 @@
         <activity
             android:name="com.example.florian.leapeat.QuizActivity"
             android:label="@string/title_activity_quiz" >
+        </activity>
+        <activity
+            android:name="com.example.florian.leapeat.EveryTimeActivity"
+            android:label="@string/title_activity_every_time" >
+        </activity>
+        <activity
+            android:name="com.example.florian.leapeat.VocoClockActivity"
+            android:label="@string/title_activity_voco_clock" >
         </activity>
     </application>
 

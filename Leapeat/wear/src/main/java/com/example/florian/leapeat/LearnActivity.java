@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class LearnActivity extends Activity {
@@ -27,10 +28,41 @@ public class LearnActivity extends Activity {
     public void startQuiz(View view)
     {
         Intent intent = new Intent(this, QuizActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.edit_message);
-        //String message = editText.getText().toString();
-        //intent.putExtra("MESSAGE", message);
         startActivity(intent);
+    }
+    public void StartEveryTime(View view)
+    {
+        CheckBox CheckBoxTime = (CheckBox) findViewById(R.id.checkBox_everyTime);
+        CheckBox CheckBoxVoc = (CheckBox) findViewById(R.id.checkBox_VocoClock);
+
+
+        if (CheckBoxTime.isChecked())
+            CheckBoxTime.setChecked(false);
+
+        else{
+            CheckBoxTime.setChecked(true);
+            CheckBoxVoc.setChecked(false);
+        }
+
+        //Intent intent = new Intent(this, EveryTimeActivity.class);
+        //startActivity(intent);
+    }
+    public void startVocoClock(View view)
+    {
+        CheckBox CheckBoxVoc = (CheckBox) findViewById(R.id.checkBox_VocoClock);
+        CheckBox CheckBoxTime = (CheckBox) findViewById(R.id.checkBox_everyTime);
+
+
+        if (CheckBoxVoc.isChecked())
+            CheckBoxVoc.setChecked(false);
+
+        else{
+            CheckBoxVoc.setChecked(true);
+            CheckBoxTime.setChecked(false);
+        }
+
+        //Intent intent = new Intent(this, VocoClockActivity.class);
+        // startActivity(intent);
     }
 
 }
