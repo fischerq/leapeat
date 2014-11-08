@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 public class ScreenService extends Service {
+    private BroadcastReceiver myReceiver;
     public ScreenService() {
     }
     @Override
@@ -16,9 +17,8 @@ public class ScreenService extends Service {
         // register receiver that handles screen on and screen off logic
         IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
-        filter.addAction("LeapeatStop");
-        BroadcastReceiver mReceiver = new ScreenReceiver(this);
-        registerReceiver(mReceiver, filter);
+        myReceiver = new ScreenReceiver(this);
+        registerReceiver(myReceiver, filter);
         Log.i("Service", "Started!");
     }
 
@@ -38,6 +38,7 @@ public class ScreenService extends Service {
     }
 
     public void onDestroy(){
+        unregisterReceiver(myReceiver);
         Log.i("Service Destroyed","Destroyed" );
         super.onDestroy();
     }

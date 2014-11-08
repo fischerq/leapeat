@@ -1,10 +1,15 @@
 package com.example.florian.leapeat;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -25,6 +30,38 @@ public class LearnActivity extends Activity {
         });
     }
 
+    protected void onCreateView(LayoutInflater inflater, ViewGroup container,
+                                Bundle savedInstanceState) {
+        CheckBox CheckBoxTime = (CheckBox) findViewById(R.id.checkBox_everyTime);
+        CheckBox CheckBoxVoc = (CheckBox) findViewById(R.id.checkBox_VocoClock);
+
+        if(isMyServiceRunning(ScreenService.class))
+        {
+            CheckBoxTime.setChecked(true);
+            CheckBoxVoc.setChecked(false);
+        }
+        else if(false)
+        {
+            CheckBoxTime.setChecked(false);
+            CheckBoxVoc.setChecked(true);
+        }
+        else {
+            CheckBoxTime.setChecked(false);
+            CheckBoxVoc.setChecked(false);
+        }
+    }
+
+    private boolean isMyServiceRunning(Class<?> serviceClass) {
+        Log.i("Running?", serviceClass.getName());
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            Log.i("Running", serviceClass.getName());
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
     public void startQuiz(View view)
     {
         Intent intent = new Intent(this, QuizActivity.class);
