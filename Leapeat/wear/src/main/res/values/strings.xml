@@ -7,5 +7,6 @@
     <string name="learning">Lernen</string>
     <string name="vocabulary">Vokabeln</string>
     <string name="settings">Einstellungen</string>
+    <string name="title_activity_settings">SettingsActivity</string>
 
 </resources>
