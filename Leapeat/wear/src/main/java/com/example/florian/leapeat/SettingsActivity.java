@@ -1,9 +1,12 @@
 package com.example.florian.leapeat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
+import android.view.View;
 import android.widget.TextView;
+import android.content.SharedPreferences;
 
 public class SettingsActivity extends Activity {
 
@@ -20,5 +23,26 @@ public class SettingsActivity extends Activity {
                 mTextView = (TextView) stub.findViewById(R.id.text);
             }
         });
+    }
+
+    public void setSee(View view)
+    {
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = prefs.edit();
+        ed.putString("AnswerMode", "See");
+    }
+
+    public void setAnswer(View view)
+    {
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = prefs.edit();
+        ed.putString("AnswerMode", "Answer");
+    }
+
+    public void setCheck(View view)
+    {
+        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor ed = prefs.edit();
+        ed.putString("AnswerMode", "Check");
     }
 }

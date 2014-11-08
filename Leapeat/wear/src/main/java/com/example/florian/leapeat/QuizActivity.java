@@ -21,26 +21,37 @@ public class QuizActivity extends FragmentActivity {
     //private TextView mTextView;
     public final static String EXTRA_MESSAGE = "com.example.florian.leapeat.MESSAGE";
     public static Random generator = new Random();
-    public static String[][] Vocabulary = new String[3][2];
+    public static String[][][] Vocabulary = new String[2][3][2];
     static {
-        Vocabulary[0][0] = "to learn";
-        Vocabulary[0][1] = "lernen";
-        Vocabulary[1][0] = "to drive";
-        Vocabulary[1][1] = "fahren";
-        Vocabulary[2][0] = "skill";
-        Vocabulary[2][1] = "Fähigkeit";
+        Vocabulary[0][0][0] = "to learn";
+        Vocabulary[0][0][1] = "lernen";
+        Vocabulary[0][1][0] = "to drive";
+        Vocabulary[0][1][1] = "fahren";
+        Vocabulary[0][2][0] = "skill";
+        Vocabulary[0][2][1] = "Fähigkeit";
+
+        Vocabulary[1][0][0] = "force";
+        Vocabulary[1][0][1] = "mass * acceleration";
+        Vocabulary[1][1][0] = "kinetic energy";
+        Vocabulary[1][1][1] = "1/2 * mass * (speed)^2";
+        Vocabulary[1][2][0] = "distance";
+        Vocabulary[1][2][1] = "time * speed";
     }
-    public int index = 0;
+
 
     public int AnswerRight = 0;
     public int AnswerFalse = 0;
 
     private int mode = 1;
+    public int index = 0;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+
+        String answer_mode = getPreferences(MODE_PRIVATE).getString("AnswerMode", "Answer");
+        int vocabulary = getPreferences(MODE_PRIVATE).getInt("Vocabulary", 0);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -49,12 +60,14 @@ public class QuizActivity extends FragmentActivity {
                 index = generator.nextInt(Vocabulary.length);
             }
             mode = extras.getInt("MODE");
-            Log.i("Quiz", "M: " + mode + " i: " + index);
+            Log.i("Quiz", "M: " + mode + " i: " + index+" ans: "+answer_mode);
         }
         else
         {
             Log.i("Quiz", "Bad Intent");
         }
+
+
 
 
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);

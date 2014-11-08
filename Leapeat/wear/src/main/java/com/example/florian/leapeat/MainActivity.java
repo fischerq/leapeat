@@ -39,6 +39,16 @@ public class MainActivity extends Activity {
         //intent.putExtra("MESSAGE", message);
         startActivity(intent);
     }
+
+    public void startCategory(View view)
+    {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        //EditText editText = (EditText) findViewById(R.id.edit_message);
+        //String message = editText.getText().toString();
+        //intent.putExtra("MESSAGE", message);
+        startActivity(intent);
+    }
+
     public void startSettings(View view)
     {
         Intent intent = new Intent(this, SettingsActivity.class);
