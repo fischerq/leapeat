@@ -1,21 +1,20 @@
 package com.example.florian.leapeat;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
 import android.widget.TextView;
-import android.content.SharedPreferences;
 
-public class SettingsActivity extends Activity {
+public class CategoryActivity extends Activity {
 
     private TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_category);
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
@@ -25,27 +24,19 @@ public class SettingsActivity extends Activity {
         });
     }
 
-    public void setSee(View view)
+    public void setEnglish(View view)
     {
-        SharedPreferences prefs = getSharedPreferences("Lepeat", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("Lepeat",MODE_PRIVATE);
         SharedPreferences.Editor ed = prefs.edit();
-        ed.putString("AnswerMode", "See");
+        ed.putInt("Category", 0);
         ed.commit();
     }
 
-    public void setAnswer(View view)
+    public void setPhysics(View view)
     {
-        SharedPreferences prefs = getSharedPreferences("Lepeat", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("Lepeat",MODE_PRIVATE);
         SharedPreferences.Editor ed = prefs.edit();
-        ed.putString("AnswerMode", "Answer");
-        ed.commit();
-    }
-
-    public void setCheck(View view)
-    {
-        SharedPreferences prefs = getSharedPreferences("Lepeat", MODE_PRIVATE);
-        SharedPreferences.Editor ed = prefs.edit();
-        ed.putString("AnswerMode", "Check");
+        ed.putInt("Category", 1);
         ed.commit();
     }
 }

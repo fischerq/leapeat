@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
 
     public void startCategory(View view)
     {
-        Intent intent = new Intent(this, SettingsActivity.class);
+        Intent intent = new Intent(this, CategoryActivity.class);
         //EditText editText = (EditText) findViewById(R.id.edit_message);
         //String message = editText.getText().toString();
         //intent.putExtra("MESSAGE", message);

@@ -2,6 +2,7 @@ package com.example.florian.leapeat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -44,6 +45,7 @@ public class QuizActivity extends FragmentActivity {
     public int AnswerRight = 0;
     public int AnswerFalse = 0;
 
+    private int index;
     private int mode = 1;
     public TextView vocabularyText;
 
@@ -52,8 +54,8 @@ public class QuizActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        String answer_mode = getPreferences(MODE_PRIVATE).getString("AnswerMode", "Answer");
-        int vocabulary = getPreferences(MODE_PRIVATE).getInt("Vocabulary", 0);
+        String answer_mode = getSharedPreferences("Lepeat",MODE_PRIVATE).getString("AnswerMode", "Answer");
+        int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -62,7 +64,7 @@ public class QuizActivity extends FragmentActivity {
                 index = generator.nextInt(Vocabulary.length);
             }
             mode = extras.getInt("MODE");
-            Log.i("Quiz", "M: " + mode + " i: " + index+" ans: "+answer_mode);
+            Log.i("Quiz", "M: " + mode + " i: " + index+" ans: "+answer_mode+" cat "+category);
         }
         else
         {
@@ -78,7 +80,8 @@ public class QuizActivity extends FragmentActivity {
             public void onLayoutInflated(WatchViewStub stub) {
                // mTextView = (TextView) stub.findViewById(R.id.text);
                 vocabularyText = (TextView) findViewById(R.id.vocabText);
-                vocabularyText.setText(Vocabulary[index][0]);
+                int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
+                vocabularyText.setText(Vocabulary[category][index][0]);
 
 
             }
@@ -93,7 +96,8 @@ public class QuizActivity extends FragmentActivity {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 TextView View = (TextView) findViewById(R.id.answer1);
-                View.setText(Vocabulary[index][1]);
+                int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
+                View.setText(Vocabulary[category][index][1]);
 
                 AnswerRight++;
                 index++;
@@ -102,30 +106,30 @@ public class QuizActivity extends FragmentActivity {
 
                 View.setOnTouchListener(new android.view.View.OnTouchListener() {
                     public boolean onTouch(View v, MotionEvent event) {
-
+                        int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
                         int action = MotionEventCompat.getActionMasked(event);
 
-                        switch(action) {
-                            case (MotionEvent.ACTION_DOWN) :
+                        switch (action) {
+                            case (MotionEvent.ACTION_DOWN):
                                 Log.d("DEBUG_TAG", "Action was DOWN");
                                 return true;
-                            case (MotionEvent.ACTION_MOVE) :
-                                Log.d("DEBUG_TAG","Action was MOVE");
+                            case (MotionEvent.ACTION_MOVE):
+                                Log.d("DEBUG_TAG", "Action was MOVE");
                                 return true;
-                            case (MotionEvent.ACTION_UP) :
-                                Log.d("DEBUG_TAG","Action was UP");
+                            case (MotionEvent.ACTION_UP):
+                                Log.d("DEBUG_TAG", "Action was UP");
                                 setContentView(R.layout.activity_quiz);
-                                vocabularyText.setText(Vocabulary[index][0]);
-                                
+                                vocabularyText.setText(Vocabulary[category][index][0]);
+
                                 return true;
-                            case (MotionEvent.ACTION_CANCEL) :
-                                Log.d("DEBUG_TAG","Action was CANCEL");
+                            case (MotionEvent.ACTION_CANCEL):
+                                Log.d("DEBUG_TAG", "Action was CANCEL");
                                 return true;
-                            case (MotionEvent.ACTION_OUTSIDE) :
-                                Log.d("DEBUG_TAG","Movement occurred outside bounds of current screen element");
+                            case (MotionEvent.ACTION_OUTSIDE):
+                                Log.d("DEBUG_TAG", "Movement occurred outside bounds of current screen element");
                                 return true;
-                            default :
-                                Log.d("DEBUG_TAG","Action Default for Touch Event");
+                            default:
+                                Log.d("DEBUG_TAG", "Action Default for Touch Event");
                                 return true;
                         }
 
@@ -144,8 +148,9 @@ public class QuizActivity extends FragmentActivity {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
+                int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
                 TextView View = (TextView) findViewById(R.id.answer1);
-                View.setText(Vocabulary[index][1]);
+                View.setText(Vocabulary[category][index][1]);
 
                 AnswerFalse++;
                 index++;

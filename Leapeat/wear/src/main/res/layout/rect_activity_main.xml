@@ -24,6 +24,7 @@
         android:id="@+id/vocabularyButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:onClick="startCategory"
         android:text="@string/vocabulary"
         android:textColor="#FFAD2C"/>
 
