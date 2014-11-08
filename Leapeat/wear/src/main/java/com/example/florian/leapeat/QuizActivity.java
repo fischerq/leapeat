@@ -23,6 +23,7 @@ import java.util.Random;
 public class QuizActivity extends FragmentActivity {
 
     //private TextView mTextView;
+    public static QuizActivity the_activity = null;
     public final static String EXTRA_MESSAGE = "com.example.florian.leapeat.MESSAGE";
     public static Random generator = new Random();
     public static String[][][] Vocabulary = new String[2][3][2];
@@ -53,10 +54,11 @@ public class QuizActivity extends FragmentActivity {
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        the_activity = this;
         setContentView(R.layout.activity_quiz);
 
         String answer_mode = getSharedPreferences("Lepeat",MODE_PRIVATE).getString("AnswerMode", "Answer");
-        int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
+        int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -81,7 +83,7 @@ public class QuizActivity extends FragmentActivity {
             public void onLayoutInflated(WatchViewStub stub) {
                // mTextView = (TextView) stub.findViewById(R.id.text);
                 vocabularyText = (TextView) findViewById(R.id.vocabText);
-                int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
+                int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
                 vocabularyText.setText(Vocabulary[category][index][0]);
 
 
@@ -97,7 +99,7 @@ public class QuizActivity extends FragmentActivity {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 TextView View = (TextView) findViewById(R.id.answer1);
-                int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
+                int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
                 View.setText(Vocabulary[category][index][1]);
 
                 AnswerRight++;
@@ -117,6 +119,73 @@ public class QuizActivity extends FragmentActivity {
                             //case (MotionEvent.ACTION_MOVE) :
                              //   Log.d("DEBUG_TAG","Action was MOVE");
                              //   return true;
+                            case (MotionEvent.ACTION_UP):
+                                Log.d("DEBUG_TAG", "Action was UP");
+
+                                if(mode > 0)
+                                {
+                                    the_activity.finish();
+                                }
+                                else {
+                                    setContentView(R.layout.activity_quiz);
+                                    final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+                                    stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+                                        @Override
+                                        public void onLayoutInflated(WatchViewStub stub) {
+                                            TextView vocabularyTextx = (TextView) findViewById(R.id.vocabText);
+                                            int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
+                                            vocabularyTextx.setText(Vocabulary[category][index][0]);
+                                        }
+                                    });
+                                }
+                                return true;
+                            case (MotionEvent.ACTION_CANCEL):
+                                Log.d("DEBUG_TAG", "Action was CANCEL");
+                                return true;
+                            case (MotionEvent.ACTION_OUTSIDE):
+                                Log.d("DEBUG_TAG", "Movement occurred outside bounds of current screen element");
+                                return true;
+                            default:
+                                Log.d("DEBUG_TAG", "Action Default for Touch Event");
+                                return true;
+                        }
+
+                    }
+                });
+
+
+            }
+        });
+    }
+
+    public void ActionButtonNo(View view)
+    {
+        setContentView(R.layout.activity_show_answer_);
+        final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+            @Override
+            public void onLayoutInflated(WatchViewStub stub) {
+                int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
+                TextView View = (TextView) findViewById(R.id.answer1);
+                View.setText(Vocabulary[category][index][1]);
+
+                AnswerFalse++;
+                index++;
+                if(index >=3)
+                    index = 0;
+
+                View.setOnTouchListener(new android.view.View.OnTouchListener() {
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        int action = MotionEventCompat.getActionMasked(event);
+
+                        switch (action) {
+                            case (MotionEvent.ACTION_DOWN):
+                                Log.d("DEBUG_TAG", "Action was DOWN");
+                                return true;
+                            //case (MotionEvent.ACTION_MOVE) :
+                            //   Log.d("DEBUG_TAG","Action was MOVE");
+                            //   return true;
                             case (MotionEvent.ACTION_UP):
                                 Log.d("DEBUG_TAG", "Action was UP");
 
@@ -145,27 +214,6 @@ public class QuizActivity extends FragmentActivity {
 
                     }
                 });
-
-
-            }
-        });
-    }
-
-    public void ActionButtonNo(View view)
-    {
-        setContentView(R.layout.activity_show_answer_);
-        final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
-        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
-            @Override
-            public void onLayoutInflated(WatchViewStub stub) {
-                int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
-                TextView View = (TextView) findViewById(R.id.answer1);
-                View.setText(Vocabulary[category][index][1]);
-
-                AnswerFalse++;
-                index++;
-                if(index >=3)
-                    index = 0;
             }
         });
     }
