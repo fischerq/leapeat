@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.Random;
 
@@ -97,14 +98,22 @@ public class QuizActivity extends FragmentActivity {
                             case (MotionEvent.ACTION_DOWN) :
                                 Log.d("DEBUG_TAG", "Action was DOWN");
                                 return true;
-                            case (MotionEvent.ACTION_MOVE) :
-                                Log.d("DEBUG_TAG","Action was MOVE");
-                                return true;
+                            //case (MotionEvent.ACTION_MOVE) :
+                             //   Log.d("DEBUG_TAG","Action was MOVE");
+                             //   return true;
                             case (MotionEvent.ACTION_UP) :
                                 Log.d("DEBUG_TAG","Action was UP");
+
+
                                 setContentView(R.layout.activity_quiz);
-                                vocabularyText.setText(Vocabulary[index][0]);
-                                
+                                final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+                                stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+                                    @Override
+                                    public void onLayoutInflated(WatchViewStub stub) {
+                                        TextView vocabularyTextx = (TextView) findViewById(R.id.vocabText);
+                                        vocabularyTextx.setText(Vocabulary[index][0]);
+                                    }
+                                });
                                 return true;
                             case (MotionEvent.ACTION_CANCEL) :
                                 Log.d("DEBUG_TAG","Action was CANCEL");
