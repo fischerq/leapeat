@@ -4,30 +4,36 @@
     android:layout_height="match_parent" android:orientation="vertical"
     tools:context=".MainActivity" tools:deviceIds="wear_square">
 
-    <TextView android:id="@+id/text" android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Leapeat" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:id="@+id/imageView"
+        android:paddingTop="5dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/leapeatlogo"/>
 
     <Button
         android:id="@+id/learningButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="startLearning"
-        android:text="@string/learning"/>
+        android:text="@string/learning"
+        android:textColor="#FFAD2C"/>
 
     <Button
         android:id="@+id/vocabularyButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/vocabulary"/>
+        android:text="@string/vocabulary"
+        android:textColor="#FFAD2C"/>
 
     <Button
         android:id="@+id/settingsButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="startSettings"
-        android:text="@string/settings"/>
+        android:text="@string/settings"
+        android:textColor="#FFAD2C"/>
 
 
 </LinearLayout>

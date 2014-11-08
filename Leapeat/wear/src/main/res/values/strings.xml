@@ -12,5 +12,7 @@
     <string name="title_activity_answer">AnswerActivity</string>
     <string name="title_activity_every_time">EveryTimeActivity</string>
     <string name="title_activity_voco_clock">VocoClockActivity</string>
+    <string name="title_activity_show_start_logo">Leapeat</string>
+    <string name="title_activity_show_answer_">ShowAnswer_Activity</string>
 
 </resources>

@@ -9,12 +9,14 @@ import android.support.wearable.view.WatchViewStub;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 
 public class QuizActivity extends FragmentActivity {
 
     private TextView mTextView;
+    public final static String EXTRA_MESSAGE = "com.example.florian.leapeat.MESSAGE";
 
     public String[][] Vocabulary = new String[3][2];
     public int index = 1;
@@ -40,7 +42,7 @@ public class QuizActivity extends FragmentActivity {
         Vocabulary[2][0] = "skill"; Vocabulary[2][1] = "Faehigkeit";
 
         //TextView vocabularyText = (TextView) findViewById(R.id.vocabText);
-         //   vocabularyText.setText(Vocabulary[index][0]);
+        //vocabularyText.setText(Vocabulary[index][0]);
 
     }
 
@@ -54,7 +56,9 @@ public class QuizActivity extends FragmentActivity {
         vocabularyText.setText(Vocabulary[index][0]);
         AnswerRight++;
 
-
+        Intent intent = new Intent(this, ShowAnswer_Activity.class);
+        intent.putExtra(EXTRA_MESSAGE, Vocabulary[index][1]);
+        startActivity(intent);
     }
 
     public void ActionButtonNo(View view)
@@ -63,18 +67,6 @@ public class QuizActivity extends FragmentActivity {
         //Intent intent = new Intent(this, AnswerActivity.class);
         //intent.putExtra("MESSAGE", Vocabulary[index][1]);
         //startActivity(intent);
-    }
-
-    public class ScreenSlidePageFragment extends Fragment {
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            ViewGroup rootView = (ViewGroup) inflater.inflate(
-                    R.layout.answer_layout, container, false);
-
-            return rootView;
-        }
     }
 
 }
