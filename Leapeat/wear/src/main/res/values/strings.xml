@@ -10,5 +10,7 @@
     <string name="title_activity_settings">SettingsActivity</string>
     <string name="title_activity_quiz">QuizActivity</string>
     <string name="title_activity_answer">AnswerActivity</string>
+    <string name="title_activity_every_time">EveryTimeActivity</string>
+    <string name="title_activity_voco_clock">VocoClockActivity</string>
 
 </resources>

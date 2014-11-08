@@ -9,10 +9,61 @@
         android:layout_gravity="center"
         android:text="Modus" />
 
+
+
     <Button
         android:id="@+id/QuizButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="startQuiz"
-        android:text="start leapeating"/>
+        android:text="now"/>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/EveryTimeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="StartEveryTime"
+            android:text="every time"
+            android:layout_weight="1"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/checkBox_everyTime"
+            android:clickable="false"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/VocoClockButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="startVocoClock"
+            android:text="voc o'clock"
+            android:layout_weight="1"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/checkBox_VocoClock"
+            android:clickable="false"/>
+
+    </LinearLayout>
+
+
+
+
 </LinearLayout>
