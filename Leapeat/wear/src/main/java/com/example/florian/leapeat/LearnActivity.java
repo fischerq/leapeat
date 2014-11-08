@@ -62,6 +62,8 @@ public class LearnActivity extends Activity {
     public void startQuiz(View view)
     {
         Intent intent = new Intent(this, QuizActivity.class);
+        intent.putExtra("QUIZ_ID", 0);
+        intent.putExtra("MODE", 0);
         startActivity(intent);
     }
     public void StartEveryTime(View view)

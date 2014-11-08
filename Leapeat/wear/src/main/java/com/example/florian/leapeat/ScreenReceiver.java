@@ -20,13 +20,12 @@ public class ScreenReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-            Log.i("B","fdfgsrgr");
             wasScreenOn = false;
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-            Log.i("C","aabbaab");
-
             Intent intent_learn = new Intent(context, QuizActivity.class);
             intent_learn.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent_learn.putExtra("QUIZ_ID", -1);
+            intent_learn.putExtra("MODE", 1);
             context.startActivity(intent_learn);
 
             wasScreenOn = true;
