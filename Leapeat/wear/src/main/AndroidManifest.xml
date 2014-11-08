@@ -18,6 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="com.example.florian.leapeat.ScreenService"
+            android:label="LepeatBackground"
+            android:enabled="true">
+        </service>
+
         <activity
             android:name="com.example.florian.leapeat.LearnActivity"
             android:label="@string/title_activity_settings" >
