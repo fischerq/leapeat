@@ -37,6 +37,10 @@
             android:name="com.example.florian.leapeat.QuizActivity"
             android:label="@string/title_activity_quiz" >
         </activity>
+        <activity
+            android:name="com.example.florian.leapeat.AnswerActivity"
+            android:label="@string/title_activity_answer" >
+        </activity>
     </application>
 
 </manifest>
