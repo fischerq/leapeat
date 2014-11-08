@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class QuizActivity extends FragmentActivity {
 
-    private TextView mTextView;
+    //private TextView mTextView;
     public final static String EXTRA_MESSAGE = "com.example.florian.leapeat.MESSAGE";
 
     public String[][] Vocabulary = new String[3][2];
@@ -33,16 +33,18 @@ public class QuizActivity extends FragmentActivity {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                mTextView = (TextView) stub.findViewById(R.id.text);
+               // mTextView = (TextView) stub.findViewById(R.id.text);
+
+                Vocabulary[0][0] = "to learn"; Vocabulary[0][1] = "lernen";
+                Vocabulary[1][0] = "to drive"; Vocabulary[1][1] = "fahren";
+                Vocabulary[2][0] = "skill"; Vocabulary[2][1] = "Fähigkeit";
+
+                TextView vocabularyText = (TextView) findViewById(R.id.vocabText);
+                vocabularyText.setText(Vocabulary[index][0]);
             }
         });
 
-        Vocabulary[0][0] = "to learn"; Vocabulary[0][1] = "lernen";
-        Vocabulary[1][0] = "to drive"; Vocabulary[1][1] = "fahren";
-        Vocabulary[2][0] = "skill"; Vocabulary[2][1] = "Faehigkeit";
 
-        //TextView vocabularyText = (TextView) findViewById(R.id.vocabText);
-        //vocabularyText.setText(Vocabulary[index][0]);
 
     }
 

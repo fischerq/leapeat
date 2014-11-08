@@ -15,20 +15,21 @@ public class ShowAnswer_Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_answer_);
 
-
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                mTextView = (TextView) stub.findViewById(R.id.text);
+                mTextView = (TextView) stub.findViewById(R.id.answer1);
+
+                Intent intent = getIntent();
+                String message = intent.getStringExtra(QuizActivity.EXTRA_MESSAGE);
+
+                mTextView.setText(message);
             }
         });
-
-        Intent intent = getIntent();
-        String message = intent.getStringExtra(QuizActivity.EXTRA_MESSAGE);
-
-        TextView answer = (TextView) findViewById(R.id.answerText);
-        answer.setText(message);
-
     }
+
+
+
+
 }

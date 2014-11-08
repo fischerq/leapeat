@@ -30,7 +30,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:onClick="ActionButtonYes"
-            android:src="@drawable/yesbutton"
+            android:src="@drawable/yesbutton1"
             android:id="@+id/ButtonYes" />
 
         <TextView
@@ -41,7 +41,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:onClick="ActionButtonNo"
-            android:src="@drawable/nobutton"
+            android:src="@drawable/nobutton1"
             android:id="@+id/ButtonNo" />
 
     </LinearLayout>
