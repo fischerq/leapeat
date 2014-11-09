@@ -14,18 +14,20 @@
 
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/vocabText"
             android:textColor="#FFAD2C"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:layout_weight="1"/>
         <TextView
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/answerText"
             android:textColor="#FFAD2C"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:layout_weight="1"/>
 
     </LinearLayout>
 </LinearLayout>
