@@ -18,12 +18,12 @@ public class QuizActivity extends FragmentActivity {
     public static Random generator = new Random();
     public static String[][][] Vocabulary = new String[2][3][2];
     static {
-        Vocabulary[0][0][0] = "to learn";
-        Vocabulary[0][0][1] = "lernen";
-        Vocabulary[0][1][0] = "to drive";
-        Vocabulary[0][1][1] = "fahren";
-        Vocabulary[0][2][0] = "skill";
-        Vocabulary[0][2][1] = "Fähigkeit";
+        Vocabulary[0][0][0] = "estudiar algo";
+        Vocabulary[0][0][1] = "to learn sth.";
+        Vocabulary[0][1][0] = "viajar";
+        Vocabulary[0][1][1] = "to travel";
+        Vocabulary[0][2][0] = "ciudad";
+        Vocabulary[0][2][1] = "city";
 
 
         Vocabulary[1][0][0] = "force";
