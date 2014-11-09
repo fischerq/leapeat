@@ -37,18 +37,22 @@ public class QuizActivity extends FragmentActivity {
     public int AnswerRight = 0;
     public int AnswerFalse = 0;
 
+    private boolean answer_correct;
+
     private int index;
     private int mode = 1;
+    private String answer_mode;
+    private int category;
     public TextView vocabularyText;
+    public TextView answerText;
 
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         the_activity = this;
-        setContentView(R.layout.activity_quiz);
 
-        String answer_mode = getSharedPreferences("Lepeat",MODE_PRIVATE).getString("AnswerMode", "Answer");
-        int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
+        answer_mode = getSharedPreferences("Lepeat",MODE_PRIVATE).getString("AnswerMode", "Answer");
+        category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -64,15 +68,159 @@ public class QuizActivity extends FragmentActivity {
             Log.i("Quiz", "Bad Intent");
         }
 
+        startQuestion();
+    }
+
+    public void startQuestion()
+    {
+        if(answer_mode.equals("Answer")) {
+            setContentView(R.layout.activity_quiz);
+
+            final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+            stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+                @Override
+                public void onLayoutInflated(WatchViewStub stub) {
+                    // mTextView = (TextView) stub.findViewById(R.id.text);
+                    vocabularyText = (TextView) findViewById(R.id.vocabText);
+                    int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
+                    vocabularyText.setText(Vocabulary[category][index][0]);
+                }
+            });
+        }
+        else if(answer_mode.equals("See")){
+            setContentView(R.layout.activity_see_stub);
+            Log.i("quiz","start see");
+            final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+            stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+                @Override
+                public void onLayoutInflated(WatchViewStub stub) {
+                    // mTextView = (TextView) stub.findViewById(R.id.text);
+                    vocabularyText = (TextView) findViewById(R.id.vocabText);
+                    answerText = (TextView) findViewById(R.id.answerText);
+                    int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
+                    vocabularyText.setText(Vocabulary[category][index][0]);
+                    answerText.setText(Vocabulary[category][index][1]);
+                }
+            });
+
+            stub.setOnTouchListener(new android.view.View.OnTouchListener() {
+                public boolean onTouch(View v, MotionEvent event) {
+
+                int action = MotionEventCompat.getActionMasked(event);
+
+                switch (action) {
+                    case (MotionEvent.ACTION_DOWN):
+                        Log.d("DEBUG_TAG", "Action was DOWN");
+                        return true;
+                    //case (MotionEvent.ACTION_MOVE) :
+                    //   Log.d("DEBUG_TAG","Action was MOVE");
+                    //   return true;
+                    case (MotionEvent.ACTION_UP):
+                        Log.d("DEBUG_TAG", "Action was UP");
+
+                        if(mode > 0)
+                        {
+                            the_activity.finish();
+                        }
+                        else {
+                            index++;
+                            startQuestion();
+                        }
+                        return true;
+                    case (MotionEvent.ACTION_CANCEL):
+                        Log.d("DEBUG_TAG", "Action was CANCEL");
+                        return true;
+                    case (MotionEvent.ACTION_OUTSIDE):
+                        Log.d("DEBUG_TAG", "Movement occurred outside bounds of current screen element");
+                        return true;
+                    default:
+                        Log.d("DEBUG_TAG", "Action Default for Touch Event");
+                        return true;
+                }
+
+                }
+            });
+        }
+        else if(answer_mode.equals("Check")){
+            setContentView(R.layout.activity_check_stub);
+            Log.i("quiz","start check");
+            final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
+            stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
+                @Override
+                public void onLayoutInflated(WatchViewStub stub) {
+                    // mTextView = (TextView) stub.findViewById(R.id.text);
+                    vocabularyText = (TextView) findViewById(R.id.vocabText);
+                    int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
+                    vocabularyText.setText(Vocabulary[category][index][0]);
+                }
+            });
+        }
+    }
+
+    public void startAnswer(){
+        setContentView(R.layout.activity_show_answer_);
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-               // mTextView = (TextView) stub.findViewById(R.id.text);
-                vocabularyText = (TextView) findViewById(R.id.vocabText);
+                Log.i("Answer",Vocabulary[category][index][1]);
+                TextView answer = (TextView) findViewById(R.id.answer1);
                 int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
-                vocabularyText.setText(Vocabulary[category][index][0]);
+                answer.setText(Vocabulary[category][index][1]);
 
+                if(answer_correct)
+                    AnswerRight++;
+                else
+                    AnswerFalse++;
+
+                if(answer_mode.equals("Check"))
+                {
+                    TextView View_resp = (TextView) findViewById(R.id.response);
+                    if(answer_correct)
+                        View_resp.setText("Correct!");
+                    else
+                        View_resp.setText("Incorrect");
+
+                }
+
+                index++;
+                if (index >= 3)
+                    index = 0;
+            }
+        });
+        stub.setOnTouchListener(new android.view.View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+
+                int action = MotionEventCompat.getActionMasked(event);
+
+                switch (action) {
+                    case (MotionEvent.ACTION_DOWN):
+                        Log.d("DEBUG_TAG", "Action was DOWN");
+                        return true;
+                    //case (MotionEvent.ACTION_MOVE) :
+                    //   Log.d("DEBUG_TAG","Action was MOVE");
+                    //   return true;
+                    case (MotionEvent.ACTION_UP):
+                        Log.d("DEBUG_TAG", "Action was UP");
+
+                        if(mode > 0)
+                        {
+                            the_activity.finish();
+                        }
+                        else {
+                            startQuestion();
+                        }
+                        return true;
+                    case (MotionEvent.ACTION_CANCEL):
+                        Log.d("DEBUG_TAG", "Action was CANCEL");
+                        return true;
+                    case (MotionEvent.ACTION_OUTSIDE):
+                        Log.d("DEBUG_TAG", "Movement occurred outside bounds of current screen element");
+                        return true;
+                    default:
+                        Log.d("DEBUG_TAG", "Action Default for Touch Event");
+                        return true;
+                }
 
             }
         });
@@ -80,129 +228,22 @@ public class QuizActivity extends FragmentActivity {
 
     public void ActionButtonYes(View view)
     {
-        setContentView(R.layout.activity_show_answer_);
-        final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
-        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
-            @Override
-            public void onLayoutInflated(WatchViewStub stub) {
-                TextView View = (TextView) findViewById(R.id.answer1);
-                int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
-                View.setText(Vocabulary[category][index][1]);
-
-                AnswerRight++;
-                index++;
-                if (index >= 3)
-                    index = 0;
-
-                View.setOnTouchListener(new android.view.View.OnTouchListener() {
-                    public boolean onTouch(View v, MotionEvent event) {
-
-                        int action = MotionEventCompat.getActionMasked(event);
-
-                        switch (action) {
-                            case (MotionEvent.ACTION_DOWN):
-                                Log.d("DEBUG_TAG", "Action was DOWN");
-                                return true;
-                            //case (MotionEvent.ACTION_MOVE) :
-                             //   Log.d("DEBUG_TAG","Action was MOVE");
-                             //   return true;
-                            case (MotionEvent.ACTION_UP):
-                                Log.d("DEBUG_TAG", "Action was UP");
-
-                                if(mode > 0)
-                                {
-                                    the_activity.finish();
-                                }
-                                else {
-                                    setContentView(R.layout.activity_quiz);
-                                    final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
-                                    stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
-                                        @Override
-                                        public void onLayoutInflated(WatchViewStub stub) {
-                                            TextView vocabularyTextx = (TextView) findViewById(R.id.vocabText);
-                                            int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
-                                            vocabularyTextx.setText(Vocabulary[category][index][0]);
-                                        }
-                                    });
-                                }
-                                return true;
-                            case (MotionEvent.ACTION_CANCEL):
-                                Log.d("DEBUG_TAG", "Action was CANCEL");
-                                return true;
-                            case (MotionEvent.ACTION_OUTSIDE):
-                                Log.d("DEBUG_TAG", "Movement occurred outside bounds of current screen element");
-                                return true;
-                            default:
-                                Log.d("DEBUG_TAG", "Action Default for Touch Event");
-                                return true;
-                        }
-
-                    }
-                });
-
-
-            }
-        });
+        answer_correct = true;
+        startAnswer();
     }
 
     public void ActionButtonNo(View view)
     {
-        setContentView(R.layout.activity_show_answer_);
-        final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
-        stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
-            @Override
-            public void onLayoutInflated(WatchViewStub stub) {
-                int category = getSharedPreferences("Lepeat", MODE_PRIVATE).getInt("Category", 0);
-                TextView View = (TextView) findViewById(R.id.answer1);
-                View.setText(Vocabulary[category][index][1]);
-
-                AnswerFalse++;
-                index++;
-                if(index >=3)
-                    index = 0;
-
-                View.setOnTouchListener(new android.view.View.OnTouchListener() {
-                    public boolean onTouch(View v, MotionEvent event) {
-
-                        int action = MotionEventCompat.getActionMasked(event);
-
-                        switch (action) {
-                            case (MotionEvent.ACTION_DOWN):
-                                Log.d("DEBUG_TAG", "Action was DOWN");
-                                return true;
-                            //case (MotionEvent.ACTION_MOVE) :
-                            //   Log.d("DEBUG_TAG","Action was MOVE");
-                            //   return true;
-                            case (MotionEvent.ACTION_UP):
-                                Log.d("DEBUG_TAG", "Action was UP");
-                                setContentView(R.layout.activity_quiz);
-                                final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
-                                stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
-                                    @Override
-                                    public void onLayoutInflated(WatchViewStub stub) {
-                                        TextView vocabularyTextx = (TextView) findViewById(R.id.vocabText);
-                                        int category = getSharedPreferences("Lepeat",MODE_PRIVATE).getInt("Category", 0);
-                                        vocabularyTextx.setText(Vocabulary[category][index][0]);
-                                    }
-                                });
-                                return true;
-                            case (MotionEvent.ACTION_CANCEL):
-                                Log.d("DEBUG_TAG", "Action was CANCEL");
-                                return true;
-                            case (MotionEvent.ACTION_OUTSIDE):
-                                Log.d("DEBUG_TAG", "Movement occurred outside bounds of current screen element");
-                                return true;
-                            default:
-                                Log.d("DEBUG_TAG", "Action Default for Touch Event");
-                                return true;
-                        }
-
-                    }
-                });
-            }
-        });
+        answer_correct = false;
+        startAnswer();
     }
 
+    public void ActionButtonVoice(View view)
+    {
+        answer_correct = true;
+        Log.i("Voicecheck", "checking");
+        startAnswer();
+    }
     /*@Override
     public boolean onTouchEvent(MotionEvent event) {
 

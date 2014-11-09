@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:orientation="vertical"
-    tools:context="com.example.florian.leapeat.ShowAnswer_Activity" tools:deviceIds="wear_square">
+    tools:context="com.example.florian.leapeat.QuizActivity" tools:deviceIds="wear_square"
+    android:weightSum="1">
 
     <LinearLayout
-        android:id="@+id/AnswerLayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -14,18 +14,9 @@
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/response"
-            android:gravity="center"
+            android:id="@+id/vocabText"
             android:textColor="#FFAD2C"
-            android:text="" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:id="@+id/answer1"
-            android:textSize="30dp"
             android:gravity="center"
-            android:textColor="#FFAD2C"
             android:text="" />
 
     </LinearLayout>
@@ -36,12 +27,15 @@
         android:orientation="horizontal"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <ImageButton
+            android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_weight="1"
-            />
-
-
+            android:onClick="ActionButtonVoice"
+            android:src="@drawable/voicebutton"
+            android:id="@+id/ButtonVoice" />
     </LinearLayout>
+
+
+
+
 </LinearLayout>
