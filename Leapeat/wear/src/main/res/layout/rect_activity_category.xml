@@ -12,20 +12,54 @@
             android:layout_gravity="center_horizontal"
             android:src="@drawable/leapeatlogo"/>
 
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:textColor="#FFAD2C">
+
         <Button
             android:id="@+id/seeButton"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="setEnglish"
+            android:layout_weight="1"
             android:text="@string/english"
             android:textColor="#FFAD2C"/>
 
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/checkBox_English"
+            android:clickable="false"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:textColor="#FFAD2C">
+
         <Button
             android:id="@+id/answerButton"
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="setPhysics"
+            android:layout_weight="1"
             android:text="@string/physics"
             android:textColor="#FFAD2C"/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/checkBox_Physics"
+            android:clickable="false"/>
+
+    </LinearLayout>
+
 
 </LinearLayout>
