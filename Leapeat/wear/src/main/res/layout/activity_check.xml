@@ -11,6 +11,7 @@
         android:layout_weight="1"
         >
 
+
         <TextView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -27,13 +28,18 @@
         android:orientation="horizontal"
         >
 
-        <ImageButton
+
+        <ImageView
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:onClick="ActionButtonVoice"
-            android:src="@drawable/voicebutton"
-            android:id="@+id/ButtonVoice" />
+            android:src="@drawable/voicebutton_png"
+            android:id="@+id/ButtonVoice"
+            android:layout_weight="1"
+            android:clickable="true"/>
+
     </LinearLayout>
+
 
 
 

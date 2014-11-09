@@ -134,6 +134,8 @@ public class QuizActivity extends FragmentActivity {
                         }
                         else {
                             index++;
+                            if(index > 2)
+                                index = 0;
                             startQuestion();
                         }
                         return true;
@@ -251,6 +253,9 @@ public class QuizActivity extends FragmentActivity {
     public void ActionButtonVoice(View view)
     {
         answer_correct = true;
+        index++;
+        if(index > 2)
+            index = 0;
         Log.i("Voicecheck", "checking");
         startAnswer();
     }
