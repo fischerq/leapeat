@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.wearable.view.WatchViewStub;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.content.SharedPreferences;
 
 public class SettingsActivity extends Activity {
 
     private TextView mTextView;
+    private CheckBox CheckSee;
+    private CheckBox CheckAnswer;
+    private CheckBox CheckCheck;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +25,22 @@ public class SettingsActivity extends Activity {
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
-                mTextView = (TextView) stub.findViewById(R.id.text);
+                //mTextView = (TextView) stub.findViewById(R.id.text);
+                CheckSee = (CheckBox) findViewById(R.id.checkBox_SeeMode);
+                CheckAnswer = (CheckBox) findViewById(R.id.checkBox_AnswerMode);
+                CheckCheck = (CheckBox) findViewById(R.id.checkBox_CheckMode);
+
+                String answer_mode = getSharedPreferences("Lepeat",MODE_PRIVATE).getString("AnswerMode", "Answer");
+
+                if(answer_mode.equals("Answer"))                {
+                    CheckAnswer.setChecked(true);CheckCheck.setChecked(false); CheckSee.setChecked(false);
+                }
+                else if(answer_mode.equals("See")){
+                    CheckAnswer.setChecked(false);CheckCheck.setChecked(false); CheckSee.setChecked(true);
+                }
+                else if(answer_mode.equals("Check")){
+                    CheckAnswer.setChecked(true);CheckCheck.setChecked(false); CheckSee.setChecked(false);
+                }
             }
         });
     }
@@ -31,6 +51,7 @@ public class SettingsActivity extends Activity {
         SharedPreferences.Editor ed = prefs.edit();
         ed.putString("AnswerMode", "See");
         ed.commit();
+        CheckAnswer.setChecked(false);CheckCheck.setChecked(false); CheckSee.setChecked(true);
     }
 
     public void setAnswer(View view)
@@ -39,6 +60,7 @@ public class SettingsActivity extends Activity {
         SharedPreferences.Editor ed = prefs.edit();
         ed.putString("AnswerMode", "Answer");
         ed.commit();
+        CheckAnswer.setChecked(true);CheckCheck.setChecked(false); CheckSee.setChecked(false);
     }
 
     public void setCheck(View view)
@@ -47,5 +69,6 @@ public class SettingsActivity extends Activity {
         SharedPreferences.Editor ed = prefs.edit();
         ed.putString("AnswerMode", "Check");
         ed.commit();
+        CheckAnswer.setChecked(false);CheckCheck.setChecked(true); CheckSee.setChecked(false);
     }
 }

@@ -1,22 +1,12 @@
 package com.example.florian.leapeat;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.MotionEventCompat;
 import android.support.wearable.view.WatchViewStub;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import java.util.Random;
 
@@ -35,14 +25,14 @@ public class QuizActivity extends FragmentActivity {
         Vocabulary[0][2][0] = "skill";
         Vocabulary[0][2][1] = "Fähigkeit";
 
+
         Vocabulary[1][0][0] = "force";
         Vocabulary[1][0][1] = "mass * acceleration";
         Vocabulary[1][1][0] = "kinetic energy";
         Vocabulary[1][1][1] = "1/2 * mass * (speed)^2";
-        Vocabulary[1][2][0] = "distance";
-        Vocabulary[1][2][1] = "time * speed";
+        Vocabulary[1][2][0] = "area of a disk";
+        Vocabulary[1][2][1] = "A =  pi * r^2";
     }
-
 
     public int AnswerRight = 0;
     public int AnswerFalse = 0;
@@ -73,9 +63,6 @@ public class QuizActivity extends FragmentActivity {
         {
             Log.i("Quiz", "Bad Intent");
         }
-
-
-
 
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
@@ -188,8 +175,6 @@ public class QuizActivity extends FragmentActivity {
                             //   return true;
                             case (MotionEvent.ACTION_UP):
                                 Log.d("DEBUG_TAG", "Action was UP");
-
-
                                 setContentView(R.layout.activity_quiz);
                                 final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
                                 stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
